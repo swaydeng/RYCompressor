@@ -1,7 +1,7 @@
 RYCompressor
 =======
 
-A simple but easy way to compress JavaScript and CSS files, it is written in ruby based on YUI Compressor.
+A simple but easy way to compress JavaScript and CSS files, it is written in ruby based on [YUI Compressor](http://developer.yahoo.com/yui/compressor/).
 
 <https://github.com/swaydeng/RYCompressor>
 
@@ -9,11 +9,12 @@ Dependencies
 -------
 
 The following environments are required:
+
 * [Java](http://java.sun.com/) (requires Java >= 1.4)
 * [Ruby](http://www.ruby-lang.org/) (requires Ruby >= 1.9.x)
 
 HowTo
------
+-------
 
 To compress one or more files:
 
