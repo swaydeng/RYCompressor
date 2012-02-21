@@ -1,1 +1,3 @@
-This is a simple compressor written in ruby based on YUI Compressor.
+This is a simple javascript and css compressor written in ruby based on YUI Compressor.
+e.g.:
+./rycompressor.rb some-file.js some/dir/
