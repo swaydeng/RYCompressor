@@ -48,7 +48,7 @@ end
 if __FILE__ == $0
 	if ARGV.size == 0
 		RYCompressor.usage
-	elsif
+	else
 		cpsr = RYCompressor.new
 		ARGV.each { |src| cpsr.compress(src) }
 	end

@@ -28,7 +28,7 @@ To compress all JavaScript and CSS files in a directory:
 
 It will find files in the directory and then compress them. 
 
-license
+License
 -------
 
 > License: none (public domain)
