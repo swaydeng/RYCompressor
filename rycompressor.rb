@@ -13,8 +13,11 @@ class RYCompressor
   def compress(file)
     if File.file?(file) 
       compress_file(file) if to_compress?(file)
-    elsif File.directory?(file) # Do not support recursion
-      Dir.glob(File.join(file, "*.{css,js}")) { |f| compress(f) }
+    elsif File.directory?(file) 
+      # support recursion!
+      Dir.glob(File.join(file, "*")) do |f| 
+        compress(f)
+      end
     else
       warn "Legal file or directory must be supplied!"
     end
@@ -35,13 +38,25 @@ class RYCompressor
 
   # file: absolute file path,the file should be css or js file.
   def compress_file(file)
-    ext = File.extname(file) 
-    type = ext[1..-1]
-    minfile = file.dup.insert(file.rindex("."), "-min")
-    result = %x[java -jar #{@options[:core_jar_path]} --type #{type} --charset #{@options[:charset]} -o #{minfile} #{file}]
+    type    = file[/\.(css|js)$/, 1]
+    minfile = file.sub /(?=\.(css|js)$)/, "-min"
+
+    # SECURITY NOTICE:
+    # some fields come from user specificated source
+    # e.g. charset can be ' gbk && sudo rm / '
+    # This is dangerous especially when this script 
+    # acts as a web service.
+    result  = %x[
+      java  -jar      #{@options[:core_jar_path]} \
+            --type    #{type} \
+            --charset #{@options[:charset]} \
+            -o        #{minfile} #{file}
+      ] 
+
     puts "#{file} => #{minfile}"
     result
   end
+
   # Simple help infomation
   def self.usage
     puts "You need supply at least one file or directory as parameter. e.g.:",
@@ -50,7 +65,7 @@ class RYCompressor
 end
 
 if __FILE__ == $0
-  if ARGV.size == 0
+  if ARGV.empty?
     RYCompressor.usage
   else
     cpsr = RYCompressor.new
