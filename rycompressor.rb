@@ -2,7 +2,7 @@
 
 class RYCompressor
   DEFAULT_OPTIONS = { 
-    core_jar_path: "yuicompressor-2.4.7.jar",
+    core_jar_path: File.expand_path( "yuicompressor-2.4.7.jar", File.dirname(__FILE__) ),
     charset: "GBK"
   }.freeze
   
@@ -20,8 +20,6 @@ class RYCompressor
     end
   end
   
-  # Return true if the file is a js or css file, and it hasn't been compressed, 
-  # and (optional) it is not a merge file  
   def to_compress?(file)
     is_normal_js_or_css? file and not is_merge_file? file
   end
