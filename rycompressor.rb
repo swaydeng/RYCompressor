@@ -2,7 +2,7 @@
 
 class RYCompressor
   DEFAULT_OPTIONS = { 
-    jar: "yuicompressor-2.4.7.jar", # core jar path
+    core_jar_path: "yuicompressor-2.4.7.jar",
     charset: "GBK"
   }.freeze
   
